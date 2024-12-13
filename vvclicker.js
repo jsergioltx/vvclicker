@@ -206,6 +206,8 @@ if (targetElementMenuSoap) {
                                                 </div>
                                             `;
 
+                                          console.log(novoHtml);
+
                                            let div = getElementByXPath("//*[@id='pec_atendimento_soap_dados_atend']/div[1]/div[1]");
                                           div.innerHtml = novoHtml;
 
