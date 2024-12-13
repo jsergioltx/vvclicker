@@ -185,7 +185,7 @@ if (targetElementMenuSoap) {
                                     console.log(nome);    // Exibe o nome
         
                                       if (filaRecepcaoId) {
-                                            console.log("fila_recepcao_id extraído:", filaRecepcaoId);
+                                            console.log("fila_recepcao_id extraído:", filaRecepcaoId);                                       
                                         
                                             // Cria o HTML atualizado com o novo registro_id
                                             const novoHtml = `
@@ -205,6 +205,10 @@ if (targetElementMenuSoap) {
                                                     </i>
                                                 </div>
                                             `;
+
+                                           let div = getElementByXPath("//*[@id='pec_atendimento_soap_dados_atend']/div[1]/div[1]");
+                                          div.innerHtml = novoHtml;
+
                                         }
                                     else{
                                         console.error("filaRecepcaoId não encontrado. tente aqui:");
