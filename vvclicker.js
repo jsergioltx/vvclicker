@@ -168,10 +168,7 @@ if (targetElementMenuSoap) {
                         const elementoTitulo = getElementByXPath("//*[@id='pec_atendimento_soap_dados_atend']/div[1]/div[1]")
                 
                         if (elementoTitulo) {
-                                // Obtém o novo valor do registro_id a partir da função
-                               // let filaRecepcaoId = new URLSearchParams(window.location.search).get('pec_atendimento_soap%5Bfila_recepcao_id%5D');
-                            let filaRecepcaoId = new URLSearchParams(window.location.search).get('pec_atendimento_soap[fila_recepcao_id]');
-
+                            // Obtém o novo valor do registro_id a partir da função
                             let queryString = window.location.search;
                             console.log(window.location.search);
 
