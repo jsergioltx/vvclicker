@@ -84,7 +84,7 @@ function alterarHtmlElemento(xpath, novoHtml) {
 
 // Exemplo de uso
 document.addEventListener("DOMContentLoaded", () => {
-    const xpath = "/html/body/div[1]/div/form/div/nav/div[1]/div[2]/div/div[2]/div[1]"; // Substitua pelo seu XPath
+    const xpath = "//*[@id='sidebar']/div[1]/div[2]/div/div[2]/div[1]"; // Substitua pelo seu XPath
     const novoHtml = "<button style='padding: 10px; background-color: #007bff; color: white;'>Clique aqui!</button>";
     alterarHtmlElemento(xpath, "<a>teste</a>");
 });
