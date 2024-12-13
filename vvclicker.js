@@ -213,15 +213,6 @@ if (targetElementMenuSoap) {
                             } else {
                                 console.log("Elemento não encontrado");
                             }
-
-
-                    
-                              
-                            
-                                
-                        } else {
-                            console.error("elementoTitulo com a classe 'box-title' não encontrado.");
-                        }
                     });  
                     
 
