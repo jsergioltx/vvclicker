@@ -1,39 +1,3 @@
-// INICIO ADICIONAR BOTAO CHAMAR
-function adicionarBotao(localSelector) {
-    // Encontra o elemento pai onde o botão será inserido
-    const elementoPai = document.querySelector(localSelector);
-
-    if (!elementoPai) {
-        console.error(`Elemento com o seletor "${localSelector}" não encontrado.`);
-        return;
-    }
-
-    // Cria o elemento do botão
-    const botao = document.createElement("i");
-    botao.setAttribute("data-title", "Chamar usuário");
-    botao.setAttribute("data-toggle", "tooltip");
-    botao.setAttribute("data-container", "body");
-    botao.setAttribute("style", "color:black;");
-    botao.setAttribute("adm_operador_id", "1841");
-    botao.setAttribute("registro_id", "1059374");
-    botao.setAttribute("nompaciente", "Ana Maria de Sales");
-    botao.setAttribute("numprontuario", "91891");
-    botao.setAttribute("class", "fas fa-volume-up fa-lg");
-    botao.setAttribute("title", "Chamar usuário");
-
-    // Adiciona o botão ao elemento pai
-    elementoPai.appendChild(botao);
-
-    console.log("Botão adicionado com sucesso ao seletor:", localSelector);
-}
-
-// Exemplo: Adiciona o botão em um local específico após o elemento estar visível
-waitForElementToBeVisible("#sidebar", (elementoSidebar) => {
-    adicionarBotao("/html/body/div[1]/div/form/div/nav/div[1]/div[2]/div/div[2]/div[1]"); // Adicione o botão em um local específico
-});
-// FIM ADICIONAR BOTAO CHAMAR
-
-
 // Função para encontrar um elemento usando XPath
 function getElementByXPath(xpath) {
     return document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
@@ -100,6 +64,41 @@ const targetElementMenuFolhaDeRosto = getElementByXPath("//*[@id='sidebar']/div[
 //const codigoEsp = document.getElementById("lookup_key_pec_atendimento_soap_codespecialidade");
 const campoDataAtestado = getElementByXPath("//*[@id='upa_atendimento_atestado_data']");
 const campoHoraAtestado = getElementByXPath("//*[@id='upa_atendimento_atestado_hora']");
+
+// INICIO ADICIONAR BOTAO CHAMAR
+function adicionarBotao(localSelector) {
+    // Encontra o elemento pai onde o botão será inserido
+    const elementoPai = document.querySelector(localSelector);
+
+    if (!elementoPai) {
+        console.error(`Elemento com o seletor "${localSelector}" não encontrado.`);
+        return;
+    }
+
+    // Cria o elemento do botão
+    const botao = document.createElement("i");
+    botao.setAttribute("data-title", "Chamar usuário");
+    botao.setAttribute("data-toggle", "tooltip");
+    botao.setAttribute("data-container", "body");
+    botao.setAttribute("style", "color:black;");
+    botao.setAttribute("adm_operador_id", "1841");
+    botao.setAttribute("registro_id", "1059374");
+    botao.setAttribute("nompaciente", "Ana Maria de Sales");
+    botao.setAttribute("numprontuario", "91891");
+    botao.setAttribute("class", "fas fa-volume-up fa-lg");
+    botao.setAttribute("title", "Chamar usuário");
+
+    // Adiciona o botão ao elemento pai
+    elementoPai.appendChild(botao);
+
+    console.log("Botão adicionado com sucesso ao seletor:", localSelector);
+}
+
+// Exemplo: Adiciona o botão em um local específico após o elemento estar visível
+waitForElementToBeVisible("#sidebar", (elementoSidebar) => {
+    adicionarBotao("/html/body/div[1]/div/form/div/nav/div[1]/div[2]/div/div[2]/div[1]"); // Adicione o botão em um local específico
+});
+// FIM ADICIONAR BOTAO CHAMAR
 
 // Preencher o campo data do atestado com a data e hora de hoje
 waitForElementToBeVisible("#upa_atendimento_atestado_data", (upa_atendimento_atestado_data) => {
