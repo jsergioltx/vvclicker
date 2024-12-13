@@ -65,16 +65,6 @@ const targetElementMenuFolhaDeRosto = getElementByXPath("//*[@id='sidebar']/div[
 const campoDataAtestado = getElementByXPath("//*[@id='upa_atendimento_atestado_data']");
 const campoHoraAtestado = getElementByXPath("//*[@id='upa_atendimento_atestado_hora']");
 
-// INICIO ADICIONAR BOTAO CHAMAR
-    // Adiciona um listener para capturar teclas pressionadas
-    document.addEventListener("keydown", (event) => {
-        // Verifica se as teclas Shift + C foram pressionadas
-        if (event.shiftKey && event.key === "c") {
-            alert("Você pressionou Shift + C!");
-        }
-    });
-// FIM ADICIONAR BOTAO CHAMAR
-
 // Preencher o campo data do atestado com a data e hora de hoje
 waitForElementToBeVisible("#upa_atendimento_atestado_data", (upa_atendimento_atestado_data) => {
     
@@ -160,7 +150,7 @@ if (targetElementMenuSoap) {
                 if (targetElementMenuSoap.classList.contains('active')) {
                     console.log('A classe "active" foi adicionada ao item menu soap');
 
-                    // Aguardar aparecer o elemento codigoEsp e preencher com 225142
+                    // Aguardar aparecer o elemento codigoEsp e preencher com 225142 - tambem adiciona o botao chamar paciente
                     waitForElementToBeVisible("#lookup_key_pec_atendimento_soap_codespecialidade", (codigoEsp) => {
                         if(codigoEsp){
                             //codigoEsp.focus();
@@ -172,7 +162,23 @@ if (targetElementMenuSoap) {
                                 }, 100);
                             }
                         }
-                    });                    
+
+                        // Localiza o elementoTitulo pelo xPath
+                        //const elementoTitulo = document.querySelector(".box-title");
+                        const elementoTitulo = document.getElementByXpath("//*[@id='pec_atendimento_soap_dados_atend']/div[1]/div[1]")
+                
+                        if (elementoTitulo) {
+                            // Altera o conteúdo do texto e adiciona o botão
+                            elementoTitulo.innerHTML = `
+                                <i class="fas fa-list-alt"></i> Dados do atendimento 
+                                <button style="margin-left: 10px; padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                                    Chamar Paciente
+                                </button>
+                            `;
+                        } else {
+                            console.error("elementoTitulo com a classe 'box-title' não encontrado.");
+                        }
+                    });  
                     
 
                     // Aguardar aparecer o elemento campoCid e preencher com Z00
