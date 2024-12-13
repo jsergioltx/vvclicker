@@ -66,7 +66,13 @@ const campoDataAtestado = getElementByXPath("//*[@id='upa_atendimento_atestado_d
 const campoHoraAtestado = getElementByXPath("//*[@id='upa_atendimento_atestado_hora']");
 
 // INICIO ADICIONAR BOTAO CHAMAR
-
+    // Adiciona um listener para capturar teclas pressionadas
+    document.addEventListener("keydown", (event) => {
+        // Verifica se as teclas Shift + C foram pressionadas
+        if (event.shiftKey && event.key === "c") {
+            alert("Você pressionou Shift + C!");
+        }
+    });
 // FIM ADICIONAR BOTAO CHAMAR
 
 // Preencher o campo data do atestado com a data e hora de hoje
