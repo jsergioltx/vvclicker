@@ -65,48 +65,29 @@ const targetElementMenuFolhaDeRosto = getElementByXPath("//*[@id='sidebar']/div[
 const campoDataAtestado = getElementByXPath("//*[@id='upa_atendimento_atestado_data']");
 const campoHoraAtestado = getElementByXPath("//*[@id='upa_atendimento_atestado_hora']");
 
-// INICIO ADICIONAR BOTAO CHAMAR// Função para encontrar um elemento usando XPath
-function getElementByXPath(xpath) {
-    return document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-}
+// INICIO ADICIONAR BOTAO CHAMAR
+// Função para alterar o conteúdo HTML de um elemento
+function alterarHtmlElemento(xpath, novoHtml) {
+    // Localiza o elemento usando o XPath
+    const elemento = getElementByXPath(xpath);
 
-// Função para adicionar o botão
-function adicionarBotao(xpathLocal) {
-    // Localiza o elemento usando XPath
-    const elementoPai = getElementByXPath(xpathLocal);
-
-    if (!elementoPai) {
-        console.error(`Elemento com o XPath "${xpathLocal}" não encontrado.`);
+    if (!elemento) {
+        console.error(`Elemento com o XPath "${xpath}" não encontrado.`);
         return;
     }
 
-    // Cria o botão
-    const botao = document.createElement("button");
-    botao.innerText = "Olá, Mundo";
-    botao.style.padding = "10px";
-    botao.style.margin = "5px";
-    botao.style.backgroundColor = "#007bff";
-    botao.style.color = "#fff";
-    botao.style.border = "none";
-    botao.style.borderRadius = "5px";
-    botao.style.cursor = "pointer";
+    // Altera o conteúdo HTML do elemento
+    elemento.innerHTML = novoHtml;
 
-    // Adiciona um evento de clique no botão (opcional)
-    botao.addEventListener("click", () => {
-        alert("Botão 'Olá, Mundo' clicado!");
-    });
-
-    // Adiciona o botão ao elemento pai
-    elementoPai.appendChild(botao);
-
-    console.log("Botão 'Olá, Mundo' adicionado com sucesso!");
+    console.log(`Conteúdo do elemento alterado para: ${novoHtml}`);
 }
 
-// Adiciona o botão no local especificado após o DOM estar carregado
+// Exemplo de uso
 document.addEventListener("DOMContentLoaded", () => {
-    adicionarBotao("/html/body/div[1]/div/form/div/nav/div[1]/div[2]/div/div[2]/div[1]");
+    const xpath = "/html/body/div[1]/div/form/div/nav/div[1]/div[2]/div/div[2]/div[1]"; // Substitua pelo seu XPath
+    const novoHtml = "<button style='padding: 10px; background-color: #007bff; color: white;'>Clique aqui!</button>";
+    alterarHtmlElemento(xpath, "<a>teste</a>");
 });
-
 // FIM ADICIONAR BOTAO CHAMAR
 
 // Preencher o campo data do atestado com a data e hora de hoje
