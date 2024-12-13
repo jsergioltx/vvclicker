@@ -165,7 +165,7 @@ if (targetElementMenuSoap) {
 
                         // Localiza o elementoTitulo pelo xPath
                         //const elementoTitulo = document.querySelector(".box-title");
-                        const elementoTitulo = document.getElementByXpath("//*[@id='pec_atendimento_soap_dados_atend']/div[1]/div[1]")
+                        const elementoTitulo = getElementByXpath("//*[@id='pec_atendimento_soap_dados_atend']/div[1]/div[1]")
                 
                         if (elementoTitulo) {
                             // Altera o conteúdo do texto e adiciona o botão
