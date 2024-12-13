@@ -5,7 +5,6 @@ function obterFilaRecepcaoId() {
 
     if (!iframe) {
         console.error("Iframe não encontrado.");
-        return null;
     }
 
     // Obtém o atributo 'src' do iframe
@@ -13,7 +12,6 @@ function obterFilaRecepcaoId() {
 
     if (!src) {
         console.error("Atributo 'src' não encontrado no iframe.");
-        return null;
     }
 
     // Usa uma expressão regular para extrair o valor de fila_recepcao_id
@@ -23,7 +21,6 @@ function obterFilaRecepcaoId() {
         return match[1];
     } else {
         console.error("fila_recepcao_id não encontrado no atributo 'src'.");
-        return null;
     }
 }                      
                                 
