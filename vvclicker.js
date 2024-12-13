@@ -196,10 +196,10 @@ if (targetElementMenuSoap) {
                                             </i>
                                         </div>
                                     `;
-                                }*/
+                                }
                             else{
                                 console.error("filaRecepcaoId não encontrado. tente aqui:");
-                            }
+                            }*/
                             
                                 
                         } else {
