@@ -170,7 +170,7 @@ if (targetElementMenuSoap) {
                         if (elementoTitulo) {
                             function obterFilaRecepcaoId() {
                                 // Seleciona o iframe pelo ID
-                                const iframe = document.getElementById("iframe_pec_atendimento_soap_new");
+                                const iframe = getElementByXPath("//*[@id='iframe_pec_atendimento_soap_new']");
                             
                                 if (!iframe) {
                                     console.error("Iframe não encontrado.");
