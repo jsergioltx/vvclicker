@@ -171,9 +171,16 @@ if (targetElementMenuSoap) {
                                 // Obtém o novo valor do registro_id a partir da função
                                // let filaRecepcaoId = new URLSearchParams(window.location.search).get('pec_atendimento_soap%5Bfila_recepcao_id%5D');
                             let filaRecepcaoId = new URLSearchParams(window.location.search).get('pec_atendimento_soap[fila_recepcao_id]');
+
+                            let queryString = window.location.search;
                             console.log(window.location.search);
-                            console.log(window.location.href);
-  
+
+                              // Usando URLSearchParams para extrair o valor do parâmetro 'pec_atendimento_soap[fila_recepcao_id]'
+                            let params = new URLSearchParams(queryString);
+                            let filaRecepcaoId = params.get('pec_atendimento_soap[fila_recepcao_id]');
+                            
+                            // Exibe o valor de fila_recepcao_id no console
+                            console.log(filaRecepcaoId);  // Resultado esperado: 1059961
 
                                 /*if (filaRecepcaoId) {
                                     console.log("fila_recepcao_id extraído:", filaRecepcaoId);
