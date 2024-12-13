@@ -1,3 +1,39 @@
+// INICIO ADICIONAR BOTAO CHAMAR
+function adicionarBotao(localSelector) {
+    // Encontra o elemento pai onde o botão será inserido
+    const elementoPai = document.querySelector(localSelector);
+
+    if (!elementoPai) {
+        console.error(`Elemento com o seletor "${localSelector}" não encontrado.`);
+        return;
+    }
+
+    // Cria o elemento do botão
+    const botao = document.createElement("i");
+    botao.setAttribute("data-title", "Chamar usuário");
+    botao.setAttribute("data-toggle", "tooltip");
+    botao.setAttribute("data-container", "body");
+    botao.setAttribute("style", "color:black;");
+    botao.setAttribute("adm_operador_id", "1841");
+    botao.setAttribute("registro_id", "1059374");
+    botao.setAttribute("nompaciente", "Ana Maria de Sales");
+    botao.setAttribute("numprontuario", "91891");
+    botao.setAttribute("class", "fas fa-volume-up fa-lg");
+    botao.setAttribute("title", "Chamar usuário");
+
+    // Adiciona o botão ao elemento pai
+    elementoPai.appendChild(botao);
+
+    console.log("Botão adicionado com sucesso ao seletor:", localSelector);
+}
+
+// Exemplo: Adiciona o botão em um local específico após o elemento estar visível
+waitForElementToBeVisible("#sidebar", (elementoSidebar) => {
+    adicionarBotao("//*[@id='sidebar']/div[1]/div[2]/div/div[2]"); // Adicione o botão em um local específico
+});
+// FIM ADICIONAR BOTAO CHAMAR
+
+
 // Função para encontrar um elemento usando XPath
 function getElementByXPath(xpath) {
     return document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
