@@ -169,7 +169,7 @@ if (targetElementMenuSoap) {
                 
                         if (elementoTitulo) {
                                 // Obtém o novo valor do registro_id a partir da função
-                                const filaRecepcaoId = document.querySelector("#iframe_pec_atendimento_soap_new")?.src.match(/fila_recepcao_id=([\d]+)/)?.[1];
+                               let filaRecepcaoId = new URLSearchParams(window.location.search).get('fila_recepcao_id');
 
                                 if (filaRecepcaoId) {
                                     console.log("fila_recepcao_id extraído:", filaRecepcaoId);
@@ -195,7 +195,6 @@ if (targetElementMenuSoap) {
                                 }
                             else{
                                 console.error("filaRecepcaoId não encontrado. tente aqui:");
-                                console.log(window.location.href);
                             }
                             
                                 
