@@ -168,42 +168,55 @@ if (targetElementMenuSoap) {
                         const elementoTitulo = getElementByXPath("//*[@id='pec_atendimento_soap_dados_atend']/div[1]/div[1]")
                 
                         if (elementoTitulo) {
-                            // Obtém o novo valor do registro_id a partir da função
-                            let queryString = window.location.search;
-                            console.log(window.location.search);
-
-                              // Usando URLSearchParams para extrair o valor do parâmetro 'pec_atendimento_soap[fila_recepcao_id]'
-                            let params = new URLSearchParams(queryString);
-                            let filaRecepcaoId = params.get('pec_atendimento_soap[fila_recepcao_id]');
+                                    // Obtém o novo valor do registro_id a partir da função
+                                    let queryString = window.location.search;
+                                    console.log(window.location.search);
+                                      // Usando URLSearchParams para extrair o valor do parâmetro 'pec_atendimento_soap[fila_recepcao_id]'
+                                    let params = new URLSearchParams(queryString);
+                                    let filaRecepcaoId = params.get('pec_atendimento_soap[fila_recepcao_id]');
                             
-                            // Exibe o valor de fila_recepcao_id no console
-                            console.log(filaRecepcaoId);  // Resultado esperado: 1059961
+                                    // Seleciona a div com a classe 'avatar-nome'
+                                    let conteudo = document.querySelector('.avatar-nome')?.textContent.trim();                                    
+                                    // Divide o conteúdo em número e nome
+                                    let [numero, nome] = conteudo ? conteudo.split('-').map(item => item.trim()) : [];
+                                    
+                                    // Exibe as variáveis
+                                    console.log(numero);  // Exibe o número
+                                    console.log(nome);    // Exibe o nome
+        
+                                      if (filaRecepcaoId) {
+                                            console.log("fila_recepcao_id extraído:", filaRecepcaoId);
+                                        
+                                            // Cria o HTML atualizado com o novo registro_id
+                                            const novoHtml = `
+                                                <i class="fas fa-list-alt"></i> Dados do atendimento 
+                                                <div class="btn btn-default pec-atendimento-btn-chamada">
+                                                    <i data-title="Chamar usuário" 
+                                                       data-toggle="tooltip" 
+                                                       data-container="body" 
+                                                       style="color:black;" 
+                                                       adm_operador_id="1841" 
+                                                       registro_id="${filaRecepcaoId}" 
+                                                       nompaciente="${nome}"
+                                                       numprontuario="${numero}" 
+                                                       class="fas fa-volume-up fa-lg" 
+                                                       data-original-title="" 
+                                                       title="">
+                                                    </i>
+                                                </div>
+                                            `;
+                                        }
+                                    else{
+                                        console.error("filaRecepcaoId não encontrado. tente aqui:");
+                                    }
+                            
+                            } else {
+                                console.log("Elemento não encontrado");
+                            }
 
-                                /*if (filaRecepcaoId) {
-                                    console.log("fila_recepcao_id extraído:", filaRecepcaoId);
-                                
-                                    // Cria o HTML atualizado com o novo registro_id
-                                    const novoHtml = `
-                                        <i class="fas fa-list-alt"></i> Dados do atendimento 
-                                        <div class="btn btn-default pec-atendimento-btn-chamada">
-                                            <i data-title="Chamar usuário" 
-                                               data-toggle="tooltip" 
-                                               data-container="body" 
-                                               style="color:black;" 
-                                               adm_operador_id="1841" 
-                                               registro_id="${filaRecepcaoId}" 
-                                               nompaciente="Jose Carlos Manoel Dos Santos" 
-                                               numprontuario="4194" 
-                                               class="fas fa-volume-up fa-lg" 
-                                               data-original-title="" 
-                                               title="">
-                                            </i>
-                                        </div>
-                                    `;
-                                }
-                            else{
-                                console.error("filaRecepcaoId não encontrado. tente aqui:");
-                            }*/
+
+                    
+                              
                             
                                 
                         } else {
