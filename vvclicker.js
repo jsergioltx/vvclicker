@@ -168,13 +168,59 @@ if (targetElementMenuSoap) {
                         const elementoTitulo = getElementByXPath("//*[@id='pec_atendimento_soap_dados_atend']/div[1]/div[1]")
                 
                         if (elementoTitulo) {
-                            // Altera o conteúdo do texto e adiciona o botão
-                            elementoTitulo.innerHTML = `
-                                <i class="fas fa-list-alt"></i> Dados do atendimento 
-                                <button style="margin-left: 10px; padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
-                                    Chamar Paciente
-                                </button>
-                            `;
+                            function obterFilaRecepcaoId() {
+                                // Seleciona o iframe pelo ID
+                                const iframe = document.getElementById("iframe_pec_atendimento_soap_new");
+                            
+                                if (!iframe) {
+                                    console.error("Iframe não encontrado.");
+                                    return null;
+                                }
+                            
+                                // Obtém o atributo 'src' do iframe
+                                const src = iframe.getAttribute("src");
+                            
+                                // Usa uma expressão regular para extrair o valor de fila_recepcao_id
+                                const match = src.match(/fila_recepcao_id=([\d]+)/);
+                            
+                                if (match && match[1]) {
+                                    const filaRecepcaoId = match[1];
+                                    console.log("fila_recepcao_id encontrado:", filaRecepcaoId);
+                                    return filaRecepcaoId;
+                                } else {
+                                    console.error("fila_recepcao_id não encontrado no src.");
+                                    return null;
+                                }
+                            }
+                            
+
+                                // Obtém o novo valor do registro_id a partir da função
+                                const novoRegistroId = obterFilaRecepcaoId();
+                            
+                                if (!novoRegistroId) {
+                                    console.error("Não foi possível gerar o HTML porque registro_id não foi encontrado.");
+                                }
+                                else {
+                                    // Cria o HTML atualizado com o novo registro_id
+                                    const novoHtml = `
+                                        <i class="fas fa-list-alt"></i> Dados do atendimento 
+                                        <div class="btn btn-default pec-atendimento-btn-chamada">
+                                            <i data-title="Chamar usuário" 
+                                               data-toggle="tooltip" 
+                                               data-container="body" 
+                                               style="color:black;" 
+                                               adm_operador_id="1841" 
+                                               registro_id="${novoRegistroId}" 
+                                               nompaciente="Jose Carlos Manoel Dos Santos" 
+                                               numprontuario="4194" 
+                                               class="fas fa-volume-up fa-lg" 
+                                               data-original-title="" 
+                                               title="">
+                                            </i>
+                                        </div>
+                                    `;
+                                }
+                                
                         } else {
                             console.error("elementoTitulo com a classe 'box-title' não encontrado.");
                         }
