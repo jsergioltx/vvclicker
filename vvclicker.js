@@ -29,7 +29,7 @@ function adicionarBotao(localSelector) {
 
 // Exemplo: Adiciona o botão em um local específico após o elemento estar visível
 waitForElementToBeVisible("#sidebar", (elementoSidebar) => {
-    adicionarBotao("//*[@id='sidebar']/div[1]/div[2]/div/div[2]"); // Adicione o botão em um local específico
+    adicionarBotao("/html/body/div[1]/div/form/div/nav/div[1]/div[2]/div/div[2]/div[1]"); // Adicione o botão em um local específico
 });
 // FIM ADICIONAR BOTAO CHAMAR
 
