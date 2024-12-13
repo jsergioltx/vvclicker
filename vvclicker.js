@@ -66,29 +66,6 @@ const campoDataAtestado = getElementByXPath("//*[@id='upa_atendimento_atestado_d
 const campoHoraAtestado = getElementByXPath("//*[@id='upa_atendimento_atestado_hora']");
 
 // INICIO ADICIONAR BOTAO CHAMAR
-// Função para alterar o conteúdo HTML de um elemento
-function alterarHtmlElemento(xpath, novoHtml) {
-    // Localiza o elemento usando o XPath
-    const elemento = getElementByXPath(xpath);
-
-    if (!elemento) {
-        console.error(`Elemento com o XPath "${xpath}" não encontrado.`);
-        return;
-    }
-
-    // Altera o conteúdo HTML do elemento
-    elemento.innerHTML = novoHtml;
-
-    console.log(`Conteúdo do elemento alterado para: ${novoHtml}`);
-}
-
-// Exemplo de uso
-waitForElementToBeVisible("#sidebar", (sidebar) => {
-    const xpath = "//*[@id='sidebar']/div[1]/div[2]/div/div[2]/div[1]"; // Substitua pelo seu XPath
-    const novoHtml = "<button style='padding: 10px; background-color: #007bff; color: white;'>Clique aqui!</button>";
-    alterarHtmlElemento(xpath, "novoHtml");
-    console.log(`Elemento visivel`)
-}
 
 // FIM ADICIONAR BOTAO CHAMAR
 
