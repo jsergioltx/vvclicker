@@ -66,16 +66,16 @@ const campoDataAtestado = getElementByXPath("//*[@id='upa_atendimento_atestado_d
 const campoHoraAtestado = getElementByXPath("//*[@id='upa_atendimento_atestado_hora']");
 
 // INICIO ADICIONAR BOTAO CHAMAR
-function adicionarBotao(localSelector) {
-    // Encontra o elemento pai onde o botão será inserido
-    const elementoPai = document.querySelector(localSelector);
+function adicionarBotao(xpathLocal) {
+    // Localiza o elemento usando XPath
+    const elementoPai = getElementByXPath(xpathLocal);
 
     if (!elementoPai) {
-        console.error(`Elemento com o seletor "${localSelector}" não encontrado.`);
+        console.error(`Elemento com o XPath "${xpathLocal}" não encontrado.`);
         return;
     }
 
-    // Cria o elemento do botão
+    // Cria o botão (elemento <i>)
     const botao = document.createElement("i");
     botao.setAttribute("data-title", "Chamar usuário");
     botao.setAttribute("data-toggle", "tooltip");
@@ -91,12 +91,12 @@ function adicionarBotao(localSelector) {
     // Adiciona o botão ao elemento pai
     elementoPai.appendChild(botao);
 
-    console.log("Botão adicionado com sucesso ao seletor:", localSelector);
+    console.log("Botão adicionado com sucesso!");
 }
 
-// Exemplo: Adiciona o botão em um local específico após o elemento estar visível
-waitForElementToBeVisible("#sidebar", (elementoSidebar) => {
-    adicionarBotao("/html/body/div[1]/div/form/div/nav/div[1]/div[2]/div/div[2]/div[1]"); // Adicione o botão em um local específico
+// Aguarde o elemento pai estar visível antes de adicionar o botão
+waitForElementToBeVisible("#sidebar", () => {
+    adicionarBotao("/html/body/div[1]/div/form/div/nav/div[1]/div[2]/div/div[2]/div[1]");
 });
 // FIM ADICIONAR BOTAO CHAMAR
 
