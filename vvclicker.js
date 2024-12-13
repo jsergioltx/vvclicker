@@ -83,11 +83,13 @@ function alterarHtmlElemento(xpath, novoHtml) {
 }
 
 // Exemplo de uso
-document.addEventListener("DOMContentLoaded", () => {
+waitForElementToBeVisible("#sidebar", (sidebar) => {
     const xpath = "//*[@id='sidebar']/div[1]/div[2]/div/div[2]/div[1]"; // Substitua pelo seu XPath
     const novoHtml = "<button style='padding: 10px; background-color: #007bff; color: white;'>Clique aqui!</button>";
-    alterarHtmlElemento(xpath, "<a>teste</a>");
-});
+    alterarHtmlElemento(xpath, "novoHtml");
+    console.log(`Elemento visivel`)
+}
+
 // FIM ADICIONAR BOTAO CHAMAR
 
 // Preencher o campo data do atestado com a data e hora de hoje
