@@ -193,6 +193,11 @@ if (targetElementMenuSoap) {
                                         </div>
                                     `;
                                 }
+                            else{
+                                console.error("filaRecepcaoId não encontrado. tente aqui:");
+                                console.log(window.location.href);
+                            }
+                            
                                 
                         } else {
                             console.error("elementoTitulo com a classe 'box-title' não encontrado.");
