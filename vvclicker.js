@@ -1,3 +1,34 @@
+// Função para encontrar o id da recepcao (nao o numero da recepcao)
+function obterFilaRecepcaoId() {
+    // Seleciona o iframe pelo ID
+    const iframe = document.getElementById("iframe_pec_atendimento_soap_new");
+
+    if (!iframe) {
+        console.error("Iframe não encontrado.");
+        return null;
+    }
+
+    // Obtém o atributo 'src' do iframe
+    const src = iframe.getAttribute("src");
+
+    if (!src) {
+        console.error("Atributo 'src' não encontrado no iframe.");
+        return null;
+    }
+
+    // Usa uma expressão regular para extrair o valor de fila_recepcao_id
+    const match = src.match(/fila_recepcao_id=([\d]+)/);
+
+    if (match && match[1]) {
+        return match[1];
+    } else {
+        console.error("fila_recepcao_id não encontrado no atributo 'src'.");
+        return null;
+    }
+}                      
+                                
+
+
 // Função para encontrar um elemento usando XPath
 function getElementByXPath(xpath) {
     return document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
@@ -168,39 +199,11 @@ if (targetElementMenuSoap) {
                         const elementoTitulo = getElementByXPath("//*[@id='pec_atendimento_soap_dados_atend']/div[1]/div[1]")
                 
                         if (elementoTitulo) {
-                            function obterFilaRecepcaoId() {
-                                // Seleciona o iframe pelo ID
-                                const iframe = getElementByXPath("//*[@id='iframe_pec_atendimento_soap_new']");
-                            
-                                if (!iframe) {
-                                    console.error("Iframe não encontrado.");
-                                    return null;
-                                }
-                            
-                                // Obtém o atributo 'src' do iframe
-                                const src = iframe.getAttribute("src");
-                            
-                                // Usa uma expressão regular para extrair o valor de fila_recepcao_id
-                                const match = src.match(/fila_recepcao_id=([\d]+)/);
-                            
-                                if (match && match[1]) {
-                                    const filaRecepcaoId = match[1];
-                                    console.log("fila_recepcao_id encontrado:", filaRecepcaoId);
-                                    return filaRecepcaoId;
-                                } else {
-                                    console.error("fila_recepcao_id não encontrado no src.");
-                                    return null;
-                                }
-                            }
-                            
-
                                 // Obtém o novo valor do registro_id a partir da função
-                                const novoRegistroId = obterFilaRecepcaoId();
-                            
-                                if (!novoRegistroId) {
-                                    console.error("Não foi possível gerar o HTML porque registro_id não foi encontrado.");
-                                }
-                                else {
+                                const filaRecepcaoId = obterFilaRecepcaoId();
+                                if (filaRecepcaoId) {
+                                    console.log("fila_recepcao_id extraído:", filaRecepcaoId);
+                                
                                     // Cria o HTML atualizado com o novo registro_id
                                     const novoHtml = `
                                         <i class="fas fa-list-alt"></i> Dados do atendimento 
@@ -210,7 +213,7 @@ if (targetElementMenuSoap) {
                                                data-container="body" 
                                                style="color:black;" 
                                                adm_operador_id="1841" 
-                                               registro_id="${novoRegistroId}" 
+                                               registro_id="${filaRecepcaoId}" 
                                                nompaciente="Jose Carlos Manoel Dos Santos" 
                                                numprontuario="4194" 
                                                class="fas fa-volume-up fa-lg" 
