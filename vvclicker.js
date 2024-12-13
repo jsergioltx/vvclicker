@@ -1,55 +1,3 @@
-// Função para encontrar o id da recepcao (nao o numero da recepcao)
-function obterFilaRecepcaoId() {
-    // Seleciona o iframe pelo ID
-    const iframe = document.getElementById("iframe_pec_atendimento_soap_new");
-
-    if (!iframe) {
-        console.error("Iframe não encontrado.");
-        return null;
-    }
-
-    // Obtém o atributo 'src' do iframe
-    const src = iframe.getAttribute("src");
-
-    if (!src) {
-        console.error("Atributo 'src' não encontrado no iframe.");
-        return null;
-    }
-
-    // Usa uma expressão regular para extrair o valor de fila_recepcao_id
-    const match = src.match(/fila_recepcao_id=([\d]+)/);
-
-    if (match && match[1]) {
-        return match[1];
-    } else {
-        console.error("fila_recepcao_id não encontrado no atributo 'src'.");
-        return null;
-    }
-}
-
-// Função que aguarda o iframe ser carregado
-function aguardarIframeEExecutar() {
-    const verificarIframe = () => {
-        const iframe = document.getElementById("iframe_pec_atendimento_soap_new");
-        if (iframe) {
-            const filaRecepcaoId = obterFilaRecepcaoId();
-            if (filaRecepcaoId) {
-                console.log("fila_recepcao_id extraído:", filaRecepcaoId);
-            }
-        } else {
-            console.log("Aguardando o iframe ser carregado...");
-            setTimeout(verificarIframe, 100); // Tenta novamente em 100ms
-        }
-    };
-
-    verificarIframe();
-}
-
-// Chamar a função
-aguardarIframeEExecutar();               
-                                
-
-
 // Função para encontrar um elemento usando XPath
 function getElementByXPath(xpath) {
     return document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
@@ -221,7 +169,8 @@ if (targetElementMenuSoap) {
                 
                         if (elementoTitulo) {
                                 // Obtém o novo valor do registro_id a partir da função
-                                const filaRecepcaoId = obterFilaRecepcaoId();
+                                const filaRecepcaoId = document.querySelector("#iframe_pec_atendimento_soap_new")?.src.match(/fila_recepcao_id=([\d]+)/)?.[1];
+
                                 if (filaRecepcaoId) {
                                     console.log("fila_recepcao_id extraído:", filaRecepcaoId);
                                 
