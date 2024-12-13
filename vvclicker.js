@@ -1,24 +1,13 @@
 // Função para encontrar o id da recepcao (nao o numero da recepcao)
-function observarIframe(callback) {
-    // Cria um MutationObserver para monitorar mudanças no DOM
-    const observer = new MutationObserver((mutationsList, observer) => {
-        for (let mutation of mutationsList) {
-            // Verifica se o iframe foi adicionado ao DOM
-            const iframe = document.getElementById("iframe_pec_atendimento_soap_new");
-            if (iframe) {
-                console.log("Iframe encontrado!");
-                observer.disconnect(); // Para de observar após encontrar o iframe
-                callback(iframe); // Chama o callback com o iframe encontrado
-                return;
-            }
-        }
-    });
+function obterFilaRecepcaoId() {
+    // Seleciona o iframe pelo ID
+    const iframe = document.getElementById("iframe_pec_atendimento_soap_new");
 
-    // Configuração do observer
-    observer.observe(document.body, { childList: true, subtree: true });
-}
+    if (!iframe) {
+        console.error("Iframe não encontrado.");
+        return null;
+    }
 
-function obterFilaRecepcaoId(iframe) {
     // Obtém o atributo 'src' do iframe
     const src = iframe.getAttribute("src");
 
@@ -38,15 +27,26 @@ function obterFilaRecepcaoId(iframe) {
     }
 }
 
-const idRecepcao = 0;
-// Usando o observer para esperar pelo iframe
-observarIframe((iframe) => {
-    const filaRecepcaoId = obterFilaRecepcaoId(iframe);
-    if (filaRecepcaoId) {
-        console.log("fila_recepcao_id extraído:", filaRecepcaoId);
-        idRecepcao = filaRecepcaoId;
-    }
-});                     
+// Função que aguarda o iframe ser carregado
+function aguardarIframeEExecutar() {
+    const verificarIframe = () => {
+        const iframe = document.getElementById("iframe_pec_atendimento_soap_new");
+        if (iframe) {
+            const filaRecepcaoId = obterFilaRecepcaoId();
+            if (filaRecepcaoId) {
+                console.log("fila_recepcao_id extraído:", filaRecepcaoId);
+            }
+        } else {
+            console.log("Aguardando o iframe ser carregado...");
+            setTimeout(verificarIframe, 100); // Tenta novamente em 100ms
+        }
+    };
+
+    verificarIframe();
+}
+
+// Chamar a função
+aguardarIframeEExecutar();               
                                 
 
 
