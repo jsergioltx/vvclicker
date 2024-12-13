@@ -65,7 +65,12 @@ const targetElementMenuFolhaDeRosto = getElementByXPath("//*[@id='sidebar']/div[
 const campoDataAtestado = getElementByXPath("//*[@id='upa_atendimento_atestado_data']");
 const campoHoraAtestado = getElementByXPath("//*[@id='upa_atendimento_atestado_hora']");
 
-// INICIO ADICIONAR BOTAO CHAMAR
+// INICIO ADICIONAR BOTAO CHAMAR// Função para encontrar um elemento usando XPath
+function getElementByXPath(xpath) {
+    return document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+}
+
+// Função para adicionar o botão
 function adicionarBotao(xpathLocal) {
     // Localiza o elemento usando XPath
     const elementoPai = getElementByXPath(xpathLocal);
@@ -75,29 +80,33 @@ function adicionarBotao(xpathLocal) {
         return;
     }
 
-    // Cria o botão (elemento <i>)
-    const botao = document.createElement("i");
-    botao.setAttribute("data-title", "Chamar usuário");
-    botao.setAttribute("data-toggle", "tooltip");
-    botao.setAttribute("data-container", "body");
-    botao.setAttribute("style", "color:black;");
-    botao.setAttribute("adm_operador_id", "1841");
-    botao.setAttribute("registro_id", "1059374");
-    botao.setAttribute("nompaciente", "Ana Maria de Sales");
-    botao.setAttribute("numprontuario", "91891");
-    botao.setAttribute("class", "fas fa-volume-up fa-lg");
-    botao.setAttribute("title", "Chamar usuário");
+    // Cria o botão
+    const botao = document.createElement("button");
+    botao.innerText = "Olá, Mundo";
+    botao.style.padding = "10px";
+    botao.style.margin = "5px";
+    botao.style.backgroundColor = "#007bff";
+    botao.style.color = "#fff";
+    botao.style.border = "none";
+    botao.style.borderRadius = "5px";
+    botao.style.cursor = "pointer";
+
+    // Adiciona um evento de clique no botão (opcional)
+    botao.addEventListener("click", () => {
+        alert("Botão 'Olá, Mundo' clicado!");
+    });
 
     // Adiciona o botão ao elemento pai
     elementoPai.appendChild(botao);
 
-    console.log("Botão adicionado com sucesso!");
+    console.log("Botão 'Olá, Mundo' adicionado com sucesso!");
 }
 
-// Aguarde o elemento pai estar visível antes de adicionar o botão
-waitForElementToBeVisible("#sidebar", () => {
+// Adiciona o botão no local especificado após o DOM estar carregado
+document.addEventListener("DOMContentLoaded", () => {
     adicionarBotao("/html/body/div[1]/div/form/div/nav/div[1]/div[2]/div/div[2]/div[1]");
 });
+
 // FIM ADICIONAR BOTAO CHAMAR
 
 // Preencher o campo data do atestado com a data e hora de hoje
