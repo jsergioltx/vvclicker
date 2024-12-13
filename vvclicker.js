@@ -1,17 +1,30 @@
 // Função para encontrar o id da recepcao (nao o numero da recepcao)
-function obterFilaRecepcaoId() {
-    // Seleciona o iframe pelo ID
-    const iframe = document.getElementById("iframe_pec_atendimento_soap_new");
+function observarIframe(callback) {
+    // Cria um MutationObserver para monitorar mudanças no DOM
+    const observer = new MutationObserver((mutationsList, observer) => {
+        for (let mutation of mutationsList) {
+            // Verifica se o iframe foi adicionado ao DOM
+            const iframe = document.getElementById("iframe_pec_atendimento_soap_new");
+            if (iframe) {
+                console.log("Iframe encontrado!");
+                observer.disconnect(); // Para de observar após encontrar o iframe
+                callback(iframe); // Chama o callback com o iframe encontrado
+                return;
+            }
+        }
+    });
 
-    if (!iframe) {
-        console.error("Iframe não encontrado.");
-    }
+    // Configuração do observer
+    observer.observe(document.body, { childList: true, subtree: true });
+}
 
+function obterFilaRecepcaoId(iframe) {
     // Obtém o atributo 'src' do iframe
     const src = iframe.getAttribute("src");
 
     if (!src) {
         console.error("Atributo 'src' não encontrado no iframe.");
+        return null;
     }
 
     // Usa uma expressão regular para extrair o valor de fila_recepcao_id
@@ -21,8 +34,19 @@ function obterFilaRecepcaoId() {
         return match[1];
     } else {
         console.error("fila_recepcao_id não encontrado no atributo 'src'.");
+        return null;
     }
-}                      
+}
+
+const idRecepcao = 0;
+// Usando o observer para esperar pelo iframe
+observarIframe((iframe) => {
+    const filaRecepcaoId = obterFilaRecepcaoId(iframe);
+    if (filaRecepcaoId) {
+        console.log("fila_recepcao_id extraído:", filaRecepcaoId);
+        idRecepcao = filaRecepcaoId;
+    }
+});                     
                                 
 
 
